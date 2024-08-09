@@ -1,7 +1,6 @@
 package com.beyond.ordersystem.ordering.Controller;
 
 import com.beyond.ordersystem.common.dto.CommonResDto;
-import com.beyond.ordersystem.member.Dto.MemberResDto;
 import com.beyond.ordersystem.ordering.Domain.Ordering;
 import com.beyond.ordersystem.ordering.Dto.OrderSaveReqDto;
 import com.beyond.ordersystem.ordering.Service.OrderingService;

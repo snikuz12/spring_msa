@@ -1,6 +1,5 @@
 package com.beyond.ordersystem.ordering.Domain;
 
-import com.beyond.ordersystem.member.Domain.Member;
 import com.beyond.ordersystem.ordering.Dto.OrderListResDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +19,8 @@ public class Ordering {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+
+    private String memberEmail;
 
     @Enumerated(value = EnumType.STRING)
     @Builder.Default
@@ -46,7 +44,7 @@ public class Ordering {
 
         OrderListResDto orderListResDto = OrderListResDto.builder()
                 .id(this.id)
-                .memberEmail(this.member.getEmail())
+                .memberEmail(this.memberEmail)
                 .orderStatus(this.orderStatus)
                 .orderDetailDtos(orderDetailDtos)
                 .build();

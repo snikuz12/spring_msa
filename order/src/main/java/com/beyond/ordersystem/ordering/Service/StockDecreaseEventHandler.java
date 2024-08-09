@@ -1,11 +1,7 @@
 package com.beyond.ordersystem.ordering.Service;
 
 import com.beyond.ordersystem.ordering.Dto.StockDecreaseEvent;
-import com.beyond.ordersystem.product.Domain.Product;
-import com.beyond.ordersystem.product.Repository.ProductRepository;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.beyond.ordersystem.common.config.RebbitMqConfig;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Arrays;
 
 @Component
 public class StockDecreaseEventHandler {
@@ -24,8 +19,6 @@ public class StockDecreaseEventHandler {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    private ProductRepository productRepository;
 
     public void publish(StockDecreaseEvent event){
         rabbitTemplate.convertAndSend(RebbitMqConfig.STOCK_DECREASE_QUEUE,event);
@@ -40,8 +33,8 @@ public class StockDecreaseEventHandler {
         ObjectMapper objectMapper = new ObjectMapper();
         try{
             StockDecreaseEvent stockDecreaseEvent = objectMapper.readValue(messageBody,StockDecreaseEvent.class);
-            Product product = productRepository.findById(stockDecreaseEvent.getProductId()).orElseThrow(()->new EntityNotFoundException("product not found"));
-            product.updateStockQuantity(stockDecreaseEvent.getProductCount());
+//            Product product = productRepository.findById(stockDecreaseEvent.getProductId()).orElseThrow(()->new EntityNotFoundException("product not found"));
+//            product.updateStockQuantity(stockDecreaseEvent.getProductCount());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

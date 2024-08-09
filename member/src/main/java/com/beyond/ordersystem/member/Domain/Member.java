@@ -3,17 +3,14 @@ package com.beyond.ordersystem.member.Domain;
 import com.beyond.ordersystem.common.domain.Address;
 import com.beyond.ordersystem.common.domain.BaseTimeEntity;
 import com.beyond.ordersystem.member.Dto.MemberResDto;
-import com.beyond.ordersystem.ordering.Domain.Ordering;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Entity
 @Getter
@@ -38,8 +35,7 @@ public class Member extends BaseTimeEntity {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Ordering> orderingList;
+
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -53,7 +49,6 @@ public class Member extends BaseTimeEntity {
                 .name(this.name)
                 .email(this.email)
                 .address(this.address)
-                .orderCount(this.orderingList.size())
                 .build();
     }
 

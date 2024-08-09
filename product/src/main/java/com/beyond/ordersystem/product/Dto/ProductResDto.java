@@ -1,7 +1,6 @@
 package com.beyond.ordersystem.product.Dto;
 
-import com.beyond.ordersystem.common.domain.Address;
-import com.beyond.ordersystem.member.Domain.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
